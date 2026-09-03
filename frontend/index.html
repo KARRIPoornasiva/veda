@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VEDA-2K26 | AI Agent Challenge - Aditya University</title>
+  <meta name="description" content="Official Single-Page Portal for VEDA-2K26 AI Agent Challenge organized by Aditya University. 2-Day Autonomous AI Hackathon on 11-09-2026 & 12-09-2026 at Computer Lab 1 & 2, BGB." />
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Ambient Glow Elements -->
+  <div class="bg-ambient-glow glow-top-left"></div>
+  <div class="bg-ambient-glow glow-bottom-right"></div>
+  <div class="bg-ambient-glow glow-center"></div>
+
+  <!-- Background Particle & Neural Grid Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ================= 1. Top Navigation Bar ================= -->
+  <header class="navbar-wrapper">
+    <nav class="navbar-container" aria-label="Main Navigation">
+      <!-- Brand / Logo -->
+      <a href="#overview" class="nav-brand">
+        <div class="brand-icon">
+          <img src="assets/adityaLogo.jpg" alt="Aditya University Logo" class="brand-logo-image" />
+        </div>
+        <div class="brand-meta">
+          <div class="brand-title">VEDA-2K26</div>
+          <div class="brand-subtitle">Aditya University</div>
+        </div>
+      </a>
+
+      <!-- In-Page Navigation Menu -->
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="#overview" class="active">Overview</a></li>
+        <li class="nav-item"><a href="#rules">Rules & Guidelines</a></li>
+        <li class="nav-item"><a href="#problems">Problem Statements</a></li>
+        <li class="nav-item"><a href="#rounds">Rounds & Timeline</a></li>
+        <li class="nav-item"><a href="#evaluation">Evaluation</a></li>
+        <li class="nav-item"><a href="#prizes">Prizes (₹12K)</a></li>
+        <li class="nav-item"><a href="#faq">FAQ & Venue</a></li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="nav-actions">
+        <button class="nav-btn-secondary" onclick="openSubmitModal()">Submit Project</button>
+        <!-- <button class="nav-btn-primary" onclick="openRegisterModal()">Register Team</button> -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= 2. Hero Section ================= -->
+  <section class="hero-section" id="overview">
+    <div class="container">
+      <div class="hero-grid">
+        
+        <!-- Hero Left Info -->
+        <div class="hero-content">
+          <div class="hero-institution-pill">
+            <span class="institution-dot"></span>
+            <span class="institution-name">Aditya University • VEDA-2K26</span>
+          </div>
+
+          <h1 class="hero-title">
+            AI Agent <br />
+            <span class="gradient-text-cyan">Challenge</span>
+          </h1>
+
+          <p class="hero-description">
+            Step beyond basic chatbots. Architect, build, and deploy fully autonomous AI Agents with real-time tool calling, reasoning, and RAG in a high-intensity 2-days.
+          </p>
+
+          <!-- Event Key Info Badges -->
+          <div class="event-info-bar">
+            <div class="event-info-item">
+              <div class="info-icon">📅</div>
+              <div class="info-text-group">
+                <span class="info-label">Event Dates</span>
+                <span class="info-val">11 & 12 Sep 2026</span>
+              </div>
+            </div>
+
+            <div class="event-info-item">
+              <div class="info-icon">📍</div>
+              <div class="info-text-group">
+                <span class="info-label">Venue</span>
+                <span class="info-val">Lab 1 & 2, BGB</span>
+              </div>
+            </div>
+
+            <div class="event-info-item">
+              <div class="info-icon">👥</div>
+              <div class="info-text-group">
+                <span class="info-label">Team Size</span>
+                <span class="info-val">1 or 2 Students</span>
+              </div>
+            </div>
+
+            <div class="event-info-item">
+              <div class="info-icon">🎟️</div>
+              <div class="info-text-group">
+                <span class="info-label">Registration</span>
+                <span class="info-val">₹200 / Team</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero CTA Actions -->
+          <div class="hero-cta-group">
+            <a href="#problems" class="btn-glow-primary">
+              <span>Explore Problem Statements</span>
+              <span>💡</span>
+            </a>
+            <a href="#rules" class="btn-glass-secondary">
+              <span>View Challenge Rules</span>
+              <span>📋</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Right Visual Card & Countdown -->
+        <div class="hero-visual-card">
+          <div class="hero-banner-img-container">
+            <img src="assets/aditya.jpeg" alt="AI Agent Challenge Banner" class="hero-banner-img" />
+            <span class="banner-badge-overlay">⚡ 3-Hour Sprints</span>
+          </div>
+
+          <!-- Hackathon Countdown Box -->
+          <div class="countdown-box">
+            <div class="countdown-heading">
+              <span>⏳Countdown is on...</span>
+            </div>
+            <div class="countdown-digits-row">
+              <div class="digit-block">
+                <span class="digit-num" id="countdownDays">00</span>
+                <span class="digit-label">Days</span>
+              </div>
+              <div class="digit-block">
+                <span class="digit-num" id="countdownHours">00</span>
+                <span class="digit-label">Hours</span>
+              </div>
+              <div class="digit-block">
+                <span class="digit-num" id="countdownMinutes">00</span>
+                <span class="digit-label">Mins</span>
+              </div>
+              <div class="digit-block">
+                <span class="digit-num" id="countdownSeconds">00</span>
+                <span class="digit-label">Secs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. Rules & Guidelines Section ================= -->
+  <section class="rules-section" id="rules">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Official Guidelines</div>
+        <h2 class="section-title">Challenge Rules & Parameters</h2>
+        <!-- <p class="section-subtitle">Read the official Aditya University parameters before designing your AI Agent.</p> -->
+      </div>
+
+      <!-- Core Highlights Cards -->
+      <div class="rules-highlight-grid">
+        <div class="rule-highlight-card team-size">
+          <div class="rule-card-accent-border"></div>
+          <div class="rule-icon-box">👥</div>
+          <h3 class="rule-card-title">Team Size: 1 or 2</h3>
+          <p class="rule-card-desc">Each team can consist of either a single solo student or a collaborative pair of 2 students from any computing branch.</p>
+        </div>
+
+        <div class="rule-highlight-card reg-fee">
+          <div class="rule-card-accent-border"></div>
+          <div class="rule-icon-box">💳</div>
+          <h3 class="rule-card-title">Registration Fee</h3>
+          <p class="rule-card-desc">The official entry fee is <strong>₹200 per Team</strong>. Full access to Lab 1 & 2 infrastructure and high-speed network provided.</p>
+        </div>
+
+        <div class="rule-highlight-card rounds-count">
+          <div class="rule-card-accent-border"></div>
+          <div class="rule-icon-box">🎯</div>
+          <h3 class="rule-card-title">2 Rounds</h3>
+          <p class="rule-card-desc">Round 1 (AI Agent Development) filters top contenders into Round 2 (Advanced AI Agent Challenge) for the final grand prize.</p>
+        </div>
+
+        <div class="rule-highlight-card duration">
+          <div class="rule-card-accent-border"></div>
+          <div class="rule-icon-box">⏱️</div>
+          <h3 class="rule-card-title">3 Hours Per Round</h3>
+          <p class="rule-card-desc">Each sprint provides strictly <strong>3hours</strong> to develop, integrate tools, test reasoning loops, and prepare a live demonstration.</p>
+        </div>
+      </div>
+
+      <!-- Detailed Rules & Prohibitions Grid -->
+      <div class="rules-detailed-box">
+        
+        <!-- Allowed Tech & Requirements -->
+        <div class="rules-pane">
+          <div class="rules-pane-header">
+            <span style="font-size: 1.5rem;">✅</span>
+            <h3 class="rules-pane-title">Permitted Technologies & Deliverables</h3>
+          </div>
+          <ul class="rules-list">
+            <li>
+              <span class="rules-bullet-icon bullet-allowed">✓</span>
+              <span><strong>Agent Frameworks:</strong> LangChain, LlamaIndex, AutoGen, CrewAI, Haystack, Semantic Kernel, or custom agent loops.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-allowed">✓</span>
+              <span><strong>Models & APIs:</strong> Google Gemini API, OpenAI GPT, Anthropic Claude, Groq, HuggingFace, or local open weights.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-allowed">✓</span>
+              <span><strong>Databases & RAG:</strong> ChromaDB, FAISS, Pinecone, Qdrant, SQLite, PostgreSQL, or knowledge graphs.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-allowed">✓</span>
+              <span><strong>Autonomous Tools:</strong> Web search engines, custom REST APIs, code execution sandboxes, calculators, and file parsers.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-allowed">✓</span>
+              <span><strong>Demonstrable Prototype:</strong> Must run live before the judging panel. Slides alone without execution will receive 0 demo score.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Strict Prohibitions -->
+        <div class="rules-pane">
+          <div class="rules-pane-header">
+            <span style="font-size: 1.5rem;">⚠️</span>
+            <h3 class="rules-pane-title">Strict Regulations & Disqualifications</h3>
+          </div>
+          <ul class="rules-list">
+            <li>
+              <span class="rules-bullet-icon bullet-warning">✕</span>
+              <span><strong>No Basic Chatbots:</strong> Standard LLM wrapper prompt UIs with no tool use, memory, or action loops are strictly disallowed.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-warning">✕</span>
+              <span><strong>No Pre-Built Turnkey Apps:</strong> Cloned boilerplate SaaS templates without original agentic architecture will be disqualified.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-warning">✕</span>
+              <span><strong>Hard Time Limit:</strong> Code freeze takes place exactly after 2 hours. Late repository pushes will not be evaluated.</span>
+            </li>
+            <li>
+              <span class="rules-bullet-icon bullet-warning">✕</span>
+              <span><strong>Live Verifiability:</strong> Every API call, tool execution step, and retrieved context must be explainable during interrogation.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Prominent Prohibition Warning Banner -->
+      <div class="strict-prohibition-banner">
+        <div class="prohibition-icon">🛑</div>
+        <div class="prohibition-text">
+          <h4>Official Rule Reminder: Basic Chatbots are Not Allowed!</h4>
+          <p>Your agent must demonstrate at least <strong>two autonomous capabilities</strong>: dynamic tool/API invocation, memory state tracking, multi-hop RAG retrieval, or closed-loop self-correction.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 4. Problem Statements Hub ================= -->
+  <section class="problem-statements-section" id="problems">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge" id="psHeaderBadge">🔒 Sealed Confidential</div>
+        <h2 class="section-title">Problem Statements Hub</h2>
+        <p class="section-subtitle" id="psHeaderSubtitle">Official Problem Statements are encrypted and will be revealed simultaneously across all lab workstations at  start time.</p>
+      </div>
+
+      <!-- 1. Locked State Vault (Shown by default while countdown timer is active) -->
+      <div class="ps-locked-vault" id="psLockedVault">
+        <div class="ps-lock-icon-wrapper">🔒</div>
+        <div class="ps-locked-badge">Confidential & Sealed</div>
+        <h3 class="ps-locked-title">Problem Statements Locked</h3>
+        <p class="ps-locked-desc">
+          To ensure fairness and competitive integrity, official problem statements for <strong>Round 1 (AI Agent Development)</strong> and <strong>Round 2 (Advanced AI Agent Challenge)</strong> are locked and will be unlocked automatically when the countdown timer hits zero.
+        </p>
+
+        <!-- Live Synchronized Reveal Timer -->
+        <div class="ps-vault-countdown">
+          <div class="ps-vault-countdown-label">⏳ Problem Statements Release Countdown</div>
+          <div class="ps-vault-digits-grid">
+            <div class="ps-vault-digit-item">
+              <div class="ps-vault-num" id="vaultCountdownDays">00</div>
+              <div class="ps-vault-tag">Days</div>
+            </div>
+            <div class="ps-vault-digit-item">
+              <div class="ps-vault-num" id="vaultCountdownHours">00</div>
+              <div class="ps-vault-tag">Hours</div>
+            </div>
+            <div class="ps-vault-digit-item">
+              <div class="ps-vault-num" id="vaultCountdownMinutes">00</div>
+              <div class="ps-vault-tag">Mins</div>
+            </div>
+            <div class="ps-vault-digit-item">
+              <div class="ps-vault-num" id="vaultCountdownSeconds">00</div>
+              <div class="ps-vault-tag">Secs</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ps-lock-rules-note">
+          <span style="font-size: 1.4rem;">⚠️</span>
+          <div>
+            <strong>Sprint Rule:</strong> Teams will have exactly <strong>3 hours</strong> from the moment the timer unlocks to build, test tools, and demonstrate their working AI Agent. Basic chatbots are strictly forbidden.
+          </div>
+        </div>
+
+        <!-- Organizer Test Toggle -->
+        <div class="ps-admin-control-bar">
+          <button class="btn-admin-toggle" id="btnToggleLock" onclick="toggleProblemStatementsLock()">
+            <span>🔑 Organizer Mode: Simulate Timer Expiry (Unlock / Lock)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Unlocked Container (Hidden while locked) -->
+      <div id="psUnlockedContainer" style="display: none;">
+        <!-- Category Filter Tabs -->
+        <div class="ps-controls">
+          <div class="ps-filter-tabs">
+            <button class="filter-btn active" data-filter="all">All Tracks (8)</button>
+            <button class="filter-btn" data-filter="round-1">Round 1 Core (5)</button>
+            <button class="filter-btn round-2-btn" data-filter="round-2">Round 2 Advanced (3)</button>
+            <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+            <button class="filter-btn" data-filter="fintech">FinTech & Fraud</button>
+            <button class="filter-btn" data-filter="devtools">DevTools & Code</button>
+            <button class="filter-btn" data-filter="edtech">EdTech & Campus</button>
+            <button class="filter-btn" data-filter="research">Fact-Checking</button>
+          </div>
+        </div>
+
+        <!-- Problem Statements Grid Container (Populated via app.js) -->
+        <div class="problems-grid" id="problemsGridContainer">
+          <!-- Rendered by app.js -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 5. Rounds & Timeline Section ================= -->
+  <section class="rounds-section" id="rounds">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Event Structure</div>
+        <h2 class="section-title">Rounds & Timeline</h2>
+        <p class="section-subtitle">A synchronized 2-day journey from foundational autonomous agents to advanced multi-agent crisis orchestration.</p>
+      </div>
+
+      <!-- Rounds Detailed Comparison Cards -->
+      <div class="rounds-comparison-grid">
+        
+        <!-- Round 1 Box -->
+        <div class="round-detail-card round-1-box">
+          <div class="round-header-row">
+            <span class="round-number-tag">Round 1 • Day 1</span>
+            <span class="round-time-badge">⏱️ 3 Hours Sprint</span>
+          </div>
+          <h3 class="round-card-title">AI Agent Development</h3>
+          <p class="round-card-desc">
+            Each team develops a fully functional, demonstrable AI Agent for their chosen problem statement with real tool calling and grounding.
+          </p>
+          <ul class="round-highlights-list">
+            <li><span class="bullet">▶</span> Open selection from Round 1 problem statement pool</li>
+            <li><span class="bullet">▶</span> Direct tool execution (APIs, RAG, Web Search, Code Runner)</li>
+            <li><span class="bullet">▶</span> Live 3-minute working demo & Q&A before faculty judges</li>
+            <li><span class="bullet">▶</span> Top scoring teams advance to Round 2</li>
+          </ul>
+        </div>
+
+        <!-- Round 2 Box -->
+        <div class="round-detail-card round-2-box">
+          <div class="round-header-row">
+            <span class="round-number-tag">Round 2 • Day 2</span>
+            <span class="round-time-badge">⏱️ 2 Hours Sprint</span>
+          </div>
+          <h3 class="round-card-title">Advanced AI Agent Challenge</h3>
+          <p class="round-card-desc">
+            Shortlisted finalist teams tackle an advanced challenge with dynamic obstacles, multi-agent orchestration, and real-time stress testing.
+          </p>
+          <ul class="round-highlights-list">
+            <li><span class="bullet">▶</span> Complex multi-agent coordination or self-healing systems</li>
+            <li><span class="bullet">▶</span> Live adversarial edge cases injected during final evaluation</li>
+            <li><span class="bullet">▶</span> Grand stage demonstration before HoD, Dean, and industry jury</li>
+            <li><span class="bullet">▶</span> 1st, 2nd, and 3rd place cash awards declared</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Step-by-Step Schedule Roadmap -->
+      <div class="timeline-roadmap">
+        
+        <!-- Day 1 Schedule -->
+        <div class="timeline-step-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content-card">
+            <div class="timeline-time">11-09-2026 • 09:00 AM - 09:45 AM</div>
+            <h4 class="timeline-title">Inauguration & Problem Track Alignment</h4>
+            <p class="timeline-desc">Opening address by Dean - Aditya University and HoD. Team verification and allocation to Computer Lab 1 & 2, BGB.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content-card">
+            <div class="timeline-time">11-09-2026 • 10:00 AM - 12:00 PM</div>
+            <h4 class="timeline-title">ROUND 1: AI Agent Development (2-Hour Sprint)</h4>
+            <p class="timeline-desc">Intense 2-hour coding sprint. Teams develop working agent workflows, connect tools, and build demo interfaces.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content-card">
+            <div class="timeline-time">11-09-2026 • 01:30 PM - 04:30 PM</div>
+            <h4 class="timeline-title">Round 1 Live Demonstrations & Shortlisting</h4>
+            <p class="timeline-desc">Jury evaluation of working prototypes. Announcement of shortlisted teams qualifying for Round 2.</p>
+          </div>
+        </div>
+
+        <!-- Day 2 Schedule -->
+        <div class="timeline-step-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content-card">
+            <div class="timeline-time">12-09-2026 • 10:00 AM - 12:00 PM</div>
+            <h4 class="timeline-title">ROUND 2: Advanced AI Agent Challenge (2-Hour Sprint)</h4>
+            <p class="timeline-desc">Finalist teams implement advanced multi-agent workflows, autonomous error handling, and complex tool chains.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content-card">
+            <div class="timeline-time">12-09-2026 • 01:00 PM - 03:00 PM</div>
+            <h4 class="timeline-title">Grand Finale Pitches & Live Stress Testing</h4>
+            <p class="timeline-desc">Finalists demonstrate real-time resilience under adversarial inputs and unscripted edge test cases.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content-card">
+            <div class="timeline-time">12-09-2026 • 03:30 PM - 04:30 PM</div>
+            <h4 class="timeline-title">Valedictory & Prize Distribution (₹12,000 Total)</h4>
+            <p class="timeline-desc">Official award ceremony with cash prizes and certificates presented by HoD and Dean, Aditya University.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 6. Evaluation Rubric Section ================= -->
+  <section class="evaluation-section" id="evaluation">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Judging Rubric</div>
+        <h2 class="section-title">Evaluation Criteria & Readiness Calculator</h2>
+        <p class="section-subtitle">Understand how your AI Agent will be scored and simulate your potential ranking in real time.</p>
+      </div>
+
+      <div class="rubric-grid">
+        
+        <!-- Criteria List -->
+        <div class="rubric-criteria-list">
+          
+          <div class="criteria-card">
+            <div class="criteria-header">
+              <span class="criteria-name">🤖 Autonomy & Dynamic Tool Calling</span>
+              <span class="criteria-weight">25% Weight</span>
+            </div>
+            <p class="criteria-desc">Agent independently decides when and how to call external tools (APIs, search, DB query, code execution) without hardcoded branching.</p>
+            <div class="criteria-progress-bar">
+              <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-header">
+              <span class="criteria-name">💡 Problem Relevance & Innovation</span>
+              <span class="criteria-weight">25% Weight</span>
+            </div>
+            <p class="criteria-desc">Originality of the agentic solution, depth of domain understanding, and effective mitigation of target pain points.</p>
+            <div class="criteria-progress-bar">
+              <div class="progress-fill" style="width: 100%;"></div>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-header">
+              <span class="criteria-name">🧠 Robustness, Memory & RAG Grounding</span>
+              <span class="criteria-weight">20% Weight</span>
+            </div>
+            <p class="criteria-desc">Handling noisy inputs, prevention of hallucinations through verified context retrieval, and multi-turn state retention.</p>
+            <div class="criteria-progress-bar">
+              <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-header">
+              <span class="criteria-name">⚡ Live Working Demonstration</span>
+              <span class="criteria-weight">20% Weight</span>
+            </div>
+            <p class="criteria-desc">Flawless execution during live judging test queries with transparent reasoning steps and real-time output delivery.</p>
+            <div class="criteria-progress-bar">
+              <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+          </div>
+
+          <div class="criteria-card">
+            <div class="criteria-header">
+              <span class="criteria-name">📐 Architecture & Code Hygiene</span>
+              <span class="criteria-weight">10% Weight</span>
+            </div>
+            <p class="criteria-desc">Clean modular code structure, clear separation of tools and prompts, readable documentation, and Git discipline.</p>
+            <div class="criteria-progress-bar">
+              <div class="progress-fill" style="width: 40%;"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive Score Simulator -->
+        <div class="calculator-card">
+          <h3 class="calculator-title">🧮 Agent Score Simulator</h3>
+          <p class="calculator-subtitle">Adjust the expected score for each dimension to estimate your team's hackathon standing.</p>
+
+          <div class="calc-slider-group">
+            <div class="calc-slider-item">
+              <label><span>Autonomy & Tool Calling</span> <span id="valAutonomy">22 / 25</span></label>
+              <input type="range" id="sliderAutonomy" min="0" max="25" value="22" step="1" />
+            </div>
+
+            <div class="calc-slider-item">
+              <label><span>Innovation & Impact</span> <span id="valInnovation">21 / 25</span></label>
+              <input type="range" id="sliderInnovation" min="0" max="25" value="21" step="1" />
+            </div>
+
+            <div class="calc-slider-item">
+              <label><span>Robustness & RAG</span> <span id="valRobustness">17 / 20</span></label>
+              <input type="range" id="sliderRobustness" min="0" max="20" value="17" step="1" />
+            </div>
+
+            <div class="calc-slider-item">
+              <label><span>Live Demonstration</span> <span id="valDemo">18 / 20</span></label>
+              <input type="range" id="sliderDemo" min="0" max="20" value="18" step="1" />
+            </div>
+
+            <div class="calc-slider-item">
+              <label><span>Code & Architecture</span> <span id="valCode">9 / 10</span></label>
+              <input type="range" id="sliderCode" min="0" max="10" value="9" step="1" />
+            </div>
+          </div>
+
+          <div class="calc-total-box">
+            <div class="calc-total-label">Estimated Overall Score</div>
+            <div class="calc-total-score" id="calcTotalScore">87 / 100</div>
+            <div class="calc-verdict-badge" id="calcVerdict">🏆 Top Contender for 1st Prize</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 7. Prize Pool & Rewards Section ================= -->
+  <section class="prizes-section" id="prizes">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Rewards & Recognition</div>
+        <h2 class="section-title">Prize Pool & Honors</h2>
+        <p class="section-subtitle">Compete for the official cash awards and certificates of merit sanctioned by the Aditya University.</p>
+      </div>
+
+      <!-- 3 Tier Prize Cards -->
+      <div class="prize-cards-container">
+        
+        <!-- 2nd Prize -->
+        <div class="prize-card silver-card">
+          <div class="trophy-icon">🥈</div>
+          <div class="prize-rank">2nd Prize (Runner Up)</div>
+          <div class="prize-amount">₹4,000/-</div>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Awarded to the Second Best Autonomous Agent</p>
+          <ul class="prize-perks-list">
+            <li><span>✓</span> ₹4,000 Direct Cash Prize</li>
+            <li><span>✓</span> Runner-Up Trophy & Medal</li>
+            <li><span>✓</span> Certificate of Merit (Aditya University)</li>
+            <li><span>✓</span> Feature in VEDA-2K26 Annual Report</li>
+          </ul>
+        </div>
+
+        <!-- 1st Prize (Center Gold Champion) -->
+        <div class="prize-card gold-card">
+          <div class="trophy-icon">🥇</div>
+          <div class="prize-rank">1st Prize (Grand Champion)</div>
+          <div class="prize-amount">₹6,000/-</div>
+          <p style="font-size: 0.88rem; color: #ffe699;">Highest Honors for Overall Best AI Agent Architecture</p>
+          <ul class="prize-perks-list">
+            <li><span>★</span> <strong>₹6,000 Direct Cash Prize</strong></li>
+            <li><span>★</span> Champion Trophy & Badges</li>
+            <li><span>★</span> Certificate of Excellence (HoD & Dean Signed)</li>
+            <li><span>★</span> Mentorship & AI Lab Incubation Support</li>
+          </ul>
+        </div>
+
+        <!-- 3rd Prize -->
+        <div class="prize-card bronze-card">
+          <div class="trophy-icon">🥉</div>
+          <div class="prize-rank">3rd Prize (Second Runner Up)</div>
+          <div class="prize-amount">₹2,000/-</div>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Awarded to the Third Best Autonomous Agent</p>
+          <ul class="prize-perks-list">
+            <li><span>✓</span> ₹2,000 Direct Cash Prize</li>
+            <li><span>✓</span> Bronze Trophy & Medal</li>
+            <li><span>✓</span> Certificate of Merit</li>
+            <li><span>✓</span> Participation Recognition</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Total Pool Bar -->
+      <div class="prize-total-pool-banner">
+        <span class="total-pool-text">Official Total Sanctioned Prize Pool:</span>
+        <span class="total-pool-val">₹12,000/- INR</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= 8. FAQ & Venue Section ================= -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-badge">Assistance & Location</div>
+        <h2 class="section-title">Frequently Asked Questions & Venue</h2>
+        <p class="section-subtitle">Everything you need to know before stepping into the hackathon lab.</p>
+      </div>
+
+      <div class="faq-grid">
+        
+        <!-- Accordion FAQ Items -->
+        <div class="faq-accordion-list">
+          
+          <div class="faq-item open">
+            <button class="faq-question-btn">
+              <span>Can an individual student participate solo without a partner?</span>
+              <span class="faq-arrow">▼</span>
+            </button>
+            <div class="faq-answer">
+              Yes, absolutely! The official rules state team size is <strong>1 or 2 students</strong>. You can register either as a solo innovator or as a 2-person team.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn">
+              <span>What strictly differentiates an "AI Agent" from a "Basic Chatbot"?</span>
+              <span class="faq-arrow">▼</span>
+            </button>
+            <div class="faq-answer">
+              A basic chatbot merely produces text directly from an LLM prompt. An <strong>AI Agent</strong> actively executes tool calls (calling APIs, querying databases, running code, searching the web), maintains structured state memory, plans multi-step tasks, and performs closed-loop reasoning.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn">
+              <span>What APIs and cloud models can we use during the 2 hours?</span>
+              <span class="faq-arrow">▼</span>
+            </button>
+            <div class="faq-answer">
+              You are free to use Google Gemini API, OpenAI GPT, Claude, Groq, local models via Ollama, or open-source Hugging Face endpoints. High-speed internet will be provided.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn">
+              <span>How is the ₹200 registration fee collected?</span>
+              <span class="faq-arrow">▼</span>
+            </button>
+            <div class="faq-answer">
+              The ₹200 registration fee per team can be confirmed upon submitting the registration form on this portal and verified at the registration desk in Computer Lab 1 & 2, BGB before Round 1 begins.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question-btn">
+              <span>What must be demonstrated during Round 1 judging?</span>
+              <span class="faq-arrow">▼</span>
+            </button>
+            <div class="faq-answer">
+              You must run your agent live on test inputs provided by the judges, display the tool execution logs/traces, and show the resulting action/report. Static screenshots without running code will not be accepted.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Venue & Facility Info Card -->
+        <div class="venue-card">
+          <div>
+            <div class="venue-header">
+              <div class="venue-icon">📍</div>
+              <div>
+                <h3 style="font-size: 1.25rem;">Hackathon Arena & Labs</h3>
+                <p style="font-size: 0.85rem; color: var(--cyan-primary);">Aditya University, BGB</p>
+              </div>
+            </div>
+
+            <ul class="venue-info-list">
+              <li class="venue-info-item">
+                <span style="color: var(--cyan-primary); font-size: 1.2rem;">🏢</span>
+                <div>
+                  <div class="venue-info-title">Designated Venue</div>
+                  <div class="venue-info-sub">Computer Lab - 1 & 2, BGB Block</div>
+                </div>
+              </li>
+
+              <li class="venue-info-item">
+                <span style="color: var(--cyan-primary); font-size: 1.2rem;">⚡</span>
+                <div>
+                  <div class="venue-info-title">Lab Infrastructure</div>
+                  <div class="venue-info-sub">High-speed LAN/Wi-Fi, dedicated power backups, and developer workstations.</div>
+                </div>
+              </li>
+
+              <li class="venue-info-item">
+                <span style="color: var(--cyan-primary); font-size: 1.2rem;">⏱️</span>
+                <div>
+                  <div class="venue-info-title">Reporting Time</div>
+                  <div class="venue-info-sub">09:00 AM sharp on 11-09-2026 for registration verification.</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <button class="btn-glow-primary" style="width: 100%; justify-content: center;" onclick="openRegisterModal()">
+            Register Your Team Now (₹200)
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 9. Footer & Authority Signatures ================= -->
+  <footer class="app-footer">
+    <div class="container">
+      
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <h3>VEDA-2K26 • AI Agent Challenge</h3>
+          <p>The premier autonomous intelligence hackathon of the Aditya University. Pushing the boundaries of tool use, multi-agent swarms, and cognitive architectures.</p>
+          <div style="font-size: 0.85rem; color: var(--cyan-primary); font-weight: 600;">
+            📅 Dates: 11-09-2026 & 12-09-2026 | 📍 Venue: Computer Lab - 1 & 2, BGB
+          </div>
+        </div>
+
+        <div class="footer-links-col">
+          <h4>Quick Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a href="#overview">Event Overview</a></li>
+            <li><a href="#rules">Rules & Fee Details</a></li>
+            <li><a href="#problems">Problem Blueprints</a></li>
+            <li><a href="#rounds">Rounds & Schedule</a></li>
+            <li><a href="#prizes">Prize Distribution</a></li>
+          </ul>
+        </div>
+
+        <!-- Official Signatures Box from DOCX Rules -->
+        <div class="official-authority-box">
+          <h4>Event Sanctioning Authorities</h4>
+          <div class="signatures-row">
+            <div class="signature-item">
+              <span class="signature-title">HoD</span>
+              <span class="signature-dept">Dept. of Computer Science</span>
+            </div>
+            <div class="signature-item">
+              <span class="signature-title">Dean - Aditya University</span>
+              <span class="signature-dept">Aditya University</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Aditya University • VEDA-2K26 AI Agent Challenge. All rights reserved.</div>
+        <div>Single-Page Interactive Portal • Zero External Navigation</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= 10. In-Page Modals (Zero External Nav) ================= -->
+  
+  <!-- Problem Blueprint Modal -->
+  <div class="modal-overlay" id="problemDetailModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeAllModals()" aria-label="Close dialog">✕</button>
+      <div id="problemModalDynamicContent">
+        <!-- Injected dynamically via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- In-Page Registration Modal -->
+  <div class="modal-overlay" id="registerModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeAllModals()" aria-label="Close dialog">✕</button>
+      <div class="modal-header">
+        <div class="section-badge" style="margin-bottom: 8px;">Single-Page Registration</div>
+        <h2 class="modal-title">Register Team for AI Agent Challenge</h2>
+        <p class="modal-subtitle">Registration Fee: ₹200 per Team | Team Size: 1 or 2 Students</p>
+      </div>
+
+      <form id="teamRegistrationForm">
+        <div class="form-group">
+          <label class="form-label" for="regTeamName">Team Name *</label>
+          <input type="text" id="regTeamName" class="form-input" placeholder="e.g. NeuralKnights / AgentX" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="regTeamSize">Team Size *</label>
+            <select id="regTeamSize" class="form-select">
+              <option value="2">2 Students (Recommended)</option>
+              <option value="1">1 Student (Solo Innovator)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regProblemTrack">Preferred Track *</label>
+            <select id="regProblemTrack" class="form-select">
+              <option value="PS-01">PS-01: Healthcare Triaging Agent</option>
+              <option value="PS-02">PS-02: FinTech Fraud Forensics Agent</option>
+              <option value="PS-03">PS-03: Self-Reflective Code Auditor</option>
+              <option value="PS-04">PS-04: Campus Academic Navigator</option>
+              <option value="PS-05">PS-05: Fact-Checking Investigative Agent</option>
+            </select>
+          </div>
+        </div>
+
+        <h4 style="font-size: 0.95rem; color: var(--cyan-primary); margin: 16px 0 10px 0;">Team Leader Details</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="regLeadName">Leader Full Name *</label>
+            <input type="text" id="regLeadName" class="form-input" placeholder="Student Name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regLeadRoll">Roll No / Student ID *</label>
+            <input type="text" id="regLeadRoll" class="form-input" placeholder="e.g. 23CS012" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="regLeadEmail">Leader Email *</label>
+            <input type="email" id="regLeadEmail" class="form-input" placeholder="email@university.edu" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="regLeadPhone">Leader Mobile *</label>
+            <input type="tel" id="regLeadPhone" class="form-input" placeholder="+91 9876543210" required />
+          </div>
+        </div>
+
+        <!-- Optional Member 2 Details -->
+        <div id="member2FieldsGroup">
+          <h4 style="font-size: 0.95rem; color: var(--purple-primary); margin: 16px 0 10px 0;">Member 2 Details</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="regMember2Name">Member 2 Full Name</label>
+              <input type="text" id="regMember2Name" class="form-input" placeholder="Partner Name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regMember2Roll">Member 2 Roll No</label>
+              <input type="text" id="regMember2Roll" class="form-input" placeholder="e.g. 23CS045" />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-form-actions">
+          <button type="button" class="nav-btn-secondary" onclick="closeAllModals()">Cancel</button>
+          <button type="submit" class="btn-glow-primary">Confirm Registration (₹200)</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- In-Page Project Submission Modal -->
+  <div class="modal-overlay" id="submitModal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeAllModals()" aria-label="Close dialog">✕</button>
+      <div class="modal-header">
+        <div class="section-badge" style="margin-bottom: 8px;">Evaluation Submission</div>
+        <h2 class="modal-title">Submit AI Agent Solution</h2>
+        <p class="modal-subtitle">Submit your code repository, architecture diagram, and live demo link before code freeze.</p>
+      </div>
+
+      <form id="projectSubmissionForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="subTeamId">Assigned Team ID *</label>
+            <input type="text" id="subTeamId" class="form-input" placeholder="e.g. VEDA-AGENT-1234" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subRoundSelect">Submission Round *</label>
+            <select id="subRoundSelect" class="form-select">
+              <option value="round-1">Round 1 – AI Agent Development</option>
+              <option value="round-2">Round 2 – Advanced AI Agent Challenge</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subRepoUrl">GitHub / GitLab Repository URL *</label>
+          <input type="url" id="subRepoUrl" class="form-input" placeholder="https://github.com/username/veda-ai-agent" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subDemoUrl">Live Hosted Demo / Video Recording URL</label>
+          <input type="url" id="subDemoUrl" class="form-input" placeholder="https://my-agent.streamlit.app or Loom video" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subAgentNotes">Agent Architecture & Autonomous Tools Summary *</label>
+          <textarea id="subAgentNotes" class="form-textarea" placeholder="List the autonomous tools integrated (e.g. PubMed RAG, Web Search, SQLite Executor), LLM used, and memory strategy." required></textarea>
+        </div>
+
+        <div class="modal-form-actions">
+          <button type="button" class="nav-btn-secondary" onclick="closeAllModals()">Cancel</button>
+          <button type="submit" class="btn-glow-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript Application Entry -->
+  <script src="app.js"></script>
+</body>
+</html>

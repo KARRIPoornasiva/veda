@@ -1,0 +1,29 @@
+ # Python virtual environments
+venv/
+.venv/
+env/
+
+# Python cache and test output
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Build and distribution output
+build/
+dist/
+*.egg-info/
