@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VEDA-2K26 | Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <main class="admin-shell">
+    <section class="login-panel" id="loginPanel">
+      <div class="eyebrow">VEDA-2K26 • Restricted Area</div>
+      <h1>Admin Dashboard</h1>
+      <p>Sign in to view project submissions.</p>
+      <form id="loginForm" class="admin-form">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" autocomplete="username" required />
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required />
+        <button type="submit">Sign in</button>
+        <div class="form-message" id="loginMessage" role="alert"></div>
+      </form>
+    </section>
+
+    <section class="dashboard-panel" id="dashboardPanel" hidden>
+      <header class="dashboard-header">
+        <div>
+          <div class="eyebrow">VEDA-2K26 • Admin</div>
+          <h1>Challenge Operations</h1>
+        </div>
+        <div class="header-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">☀️</button>
+          <button class="refresh-button" id="refreshButton" type="button">Refresh</button>
+          <button class="logout-button" id="logoutButton" type="button">Log out</button>
+        </div>
+      </header>
+
+      <div class="stats-grid">
+        <article class="stat-card"><span>Submissions</span><strong id="submissionCount">0</strong></article>
+      </div>
+
+      <section class="data-section">
+        <div class="section-heading">
+          <h2>Project Submissions</h2>
+          <div class="section-tools">
+            <input id="submissionSearch" class="submission-search" type="search" placeholder="Search submissions..." aria-label="Search submissions" />
+            <button id="deleteSubmissionsButton" class="delete-button" type="button">Delete all</button>
+            <span id="submissionStatus"></span>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Team ID</th><th>Round</th><th>Repository</th><th>Problem Statement</th><th>Notes</th><th>Submitted</th><th>Action</th></tr></thead>
+            <tbody id="submissionsTable"></tbody>
+          </table>
+        </div>
+        <div class="pagination-bar">
+          <span id="paginationSummary">Showing 0 submissions</span>
+          <div class="pagination-controls">
+            <button id="previousPage" class="pagination-button" type="button">Previous</button>
+            <span id="pageNumber">Page 1 of 1</span>
+            <button id="nextPage" class="pagination-button" type="button">Next</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

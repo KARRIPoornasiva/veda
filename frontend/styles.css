@@ -1,7 +1,7 @@
 /* ===================================================================
-   VEDA-2K26: AI AGENT CHALLENGE - MODERN STYLESHEET
-   Aesthetic: Deep Cyber-Obsidian, Neon Cyan, Electric Indigo, Emerald & Gold
-   Designed for Aditya University Hackathon Single-Page Application
+    VEDA-2K26: AI AGENT CHALLENGE - MODERN STYLESHEET
+    Aesthetic: Deep Cyber-Obsidian, Neon Cyan, Electric Indigo, Emerald & Gold
+    Designed for Aditya University Hackathon Single-Page Application
    =================================================================== */
 
 :root {
@@ -312,15 +312,15 @@ section {
   padding: 8px 14px;
   font-size: 0.92rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: #cbd5e1;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
   position: relative;
 }
 
 .nav-item a:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
+  color: var(--cyan-primary);
+  background: var(--cyan-dim);
 }
 
 .nav-item a.active {
@@ -351,6 +351,26 @@ section {
 .nav-btn-secondary:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-actions .nav-btn-secondary {
+  color: #050811;
+  background: linear-gradient(135deg, var(--cyan-primary) 0%, #00d2ff 100%);
+  border-color: transparent;
+  box-shadow: 0 0 18px var(--cyan-glow);
+  font-weight: 700;
+}
+
+.nav-actions .nav-btn-secondary:hover {
+  background: linear-gradient(135deg, #39f7ff 0%, var(--cyan-primary) 100%);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 28px rgba(0, 242, 254, 0.55);
+  transform: translateY(-1px);
+}
+
+.nav-actions .nav-btn-secondary:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
 }
 
 .nav-btn-primary {
@@ -503,6 +523,61 @@ section {
   font-size: 0.95rem;
   font-weight: 700;
   color: #ffffff;
+}
+
+/* Exam timer between navigation and page content */
+.exam-timer-strip {
+  background: rgba(7, 9, 14, 0.92);
+  border-bottom: 1px solid var(--border-subtle);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 5;
+}
+
+.exam-timer-inner {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.exam-timer-copy {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+.exam-timer-kicker {
+  color: var(--cyan-primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.exam-timer-copy strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.exam-timer-strip .countdown-digits-row {
+  width: min(460px, 100%);
+}
+
+.exam-timer-strip .digit-block {
+  padding: 11px 8px;
+}
+
+.exam-timer-strip .digit-num {
+  font-size: 1.8rem;
+}
+
+.exam-timer-strip .digit-label {
+  font-size: 0.68rem;
 }
 
 /* Hero CTA Buttons */
@@ -667,6 +742,19 @@ section {
   color: var(--text-dim);
   font-weight: 600;
   margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+  .exam-timer-inner {
+    width: min(100% - 24px, 420px);
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .exam-timer-copy {
+    justify-content: space-between;
+  }
 }
 
 /* ================= 3. Rules & Guidelines Section ================= */
@@ -1404,16 +1492,15 @@ section {
 
 /* ================= 6. Evaluation Rubric Section ================= */
 .rubric-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 32px;
-  align-items: start;
+  display: block;
 }
 
 .rubric-criteria-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .criteria-card {
@@ -1445,6 +1532,20 @@ section {
   gap: 10px;
 }
 
+.criteria-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  border-radius: 50%;
+  color: var(--cyan-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
 .criteria-weight {
   font-family: var(--font-mono);
   font-size: 0.95rem;
@@ -1460,6 +1561,50 @@ section {
   font-size: 0.9rem;
   color: var(--text-muted);
   margin-bottom: 12px;
+}
+
+.rubric-total,
+.rating-guidance {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 24px;
+}
+
+.rubric-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.rubric-total strong {
+  color: var(--cyan-primary);
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+}
+
+.rating-guidance {
+  display: grid;
+  gap: 16px;
+}
+
+.rating-group h3 {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.rating-group p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.rating-group strong {
+  color: var(--cyan-primary);
 }
 
 .criteria-progress-bar {
@@ -1923,14 +2068,14 @@ section {
 }
 
 .modal-card {
-  background: var(--bg-secondary);
+  background: linear-gradient(145deg, #111b2b 0%, #0d111a 58%, #0a121c 100%);
   border: 1px solid var(--border-active);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 680px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px var(--cyan-glow);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.85), 0 0 34px rgba(0, 242, 254, 0.22);
   position: relative;
   padding: 32px;
   transform: translateY(20px) scale(0.96);

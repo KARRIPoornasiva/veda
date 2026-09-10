@@ -23,6 +23,8 @@ veda/
 - Responsive event landing page for VEDA-2K26
 - Problem statements dashboard
 - Registration and project submission forms
+- Persistent SQLite storage for registrations and submissions
+- Protected admin dashboard at `/admin` for project submissions
 - Backend API for data and form handling
 - Frontend served through the backend for a real full-stack flow
 
@@ -81,12 +83,31 @@ Then open:
 http://127.0.0.1:5000
 ```
 
+Open the admin dashboard at:
+
+```text
+http://127.0.0.1:5000/admin
+```
+
+For local development, the default credentials are `admin` / `veda-admin-2026`. Set these environment variables before starting the server for a real deployment:
+
+```text
+ADMIN_USERNAME=your-admin-name
+ADMIN_PASSWORD=your-strong-password
+VEDA_SECRET_KEY=your-long-random-secret
+```
+
+The app stores data in `backend/veda.db`. Keep this file private and back it up as needed.
+
 ## API Endpoints
 
 - `GET /api/health` — backend health check
 - `GET /api/problems` — returns challenge problem statements
 - `POST /api/register` — registers a team
 - `POST /api/submit` — submits a project
+- `POST /api/admin/login` — starts an admin session
+- `POST /api/admin/logout` — ends an admin session
+- `GET /api/admin/dashboard` — returns project submissions for authenticated admins
 
 ## Backend Validation
 
@@ -99,8 +120,8 @@ python backend/test_api.py
 ## Notes
 
 - The frontend UI design was not changed.
-- The backend acts as a simple full-stack layer for serving the existing interface and handling form/API logic.
-- This is a lightweight development setup and can be expanded with a database or a larger frontend framework later.
+- The backend serves the public portal and admin dashboard and persists form data in SQLite.
+- Use HTTPS, strong environment-based credentials, and a production WSGI server before public deployment.
 
 ## License
 

@@ -60,7 +60,7 @@ function updateProblemStatementsLockState() {
     if (lockedVault) lockedVault.style.display = "none";
     if (unlockedContainer) unlockedContainer.style.display = "block";
     if (headerBadge) headerBadge.innerHTML = "⚡ Unlocked & Live";
-    if (headerSubtitle) headerSubtitle.innerText = "Official Problem Statements are now live! Teams have 2 hours to build and demonstrate their working AI Agent.";
+    if (headerSubtitle) headerSubtitle.innerText = "Official Problem Statements are now live! Teams have 3 hours to build and demonstrate their working AI Agent.";
     if (regTrack) {
       regTrack.innerHTML = `
         <option value="PS-01">PS-01: Healthcare Triaging Agent</option>
@@ -68,6 +68,11 @@ function updateProblemStatementsLockState() {
         <option value="PS-03">PS-03: Self-Reflective Code Auditor</option>
         <option value="PS-04">PS-04: Campus Academic Navigator</option>
         <option value="PS-05">PS-05: Fact-Checking Investigative Agent</option>
+        <option value="PS-06">PS-06: Self-Reflective Code Review Agent</option>
+        <option value="PS-07">PS-07: Campus Academic Navigator</option>
+        <option value="PS-08">PS-08: Investigative Fact-Checking Agent</option>
+        <option value="PS-09">PS-09: Security Incident Triage Agent</option>
+        <option value="PS-10">PS-10: Civic Operations Coordinator</option>
       `;
     }
   }
@@ -79,7 +84,7 @@ window.toggleProblemStatementsLock = function() {
   if (isProblemStatementsLocked) {
     showToast("🔒 Problem Statements Locked & Encrypted until Timer Expiry", "warning");
   } else {
-    showToast("🔓 Problem Statements Unlocked! Hackathon Sprint is Live!", "success");
+    showToast("🔓 Problem Statements Unlocked! Event Sprint is Live!", "success");
   }
 };
 
@@ -170,13 +175,20 @@ function initNavbarScrollSpy() {
 // 4. Live Hackathon Countdown Timer
 // ==========================================
 function initCountdownTimer() {
-  // Target: September 11, 2026, 09:00:00 IST
-  const targetDate = new Date("September 11, 2026 09:00:00").getTime();
+  const isTimerTestMode = new URLSearchParams(window.location.search).has("timerTest");
+  const testStart = Date.now() + 10 * 1000;
+  const startDate = isTimerTestMode
+    ? testStart
+    : new Date("September 11, 2026 10:00:00").getTime();
+  const endDate = isTimerTestMode
+    ? testStart + 2 * 60 * 1000
+    : new Date("September 11, 2026 13:00:00").getTime();
 
   const daysEl = document.getElementById("countdownDays");
   const hoursEl = document.getElementById("countdownHours");
   const minutesEl = document.getElementById("countdownMinutes");
   const secondsEl = document.getElementById("countdownSeconds");
+  const examTimerLabel = document.getElementById("examTimerLabel");
 
   // Synchronized vault digits
   const vDaysEl = document.getElementById("vaultCountdownDays");
@@ -186,10 +198,23 @@ function initCountdownTimer() {
 
   function updateTimer() {
     const now = new Date().getTime();
-    const distance = targetDate - now;
+
+    if (now >= startDate && isProblemStatementsLocked) {
+      isProblemStatementsLocked = false;
+      updateProblemStatementsLockState();
+    }
+
+    if (examTimerLabel) {
+      examTimerLabel.textContent = now >= startDate
+        ? "Event Exam Time Ends"
+        : "⏳ Event Count Down";
+    }
+
+    const distance = now < startDate ? startDate - now : endDate - now;
 
     if (distance < 0) {
       const zeroStr = "00";
+      if (examTimerLabel) examTimerLabel.textContent = "Event Exam Time Ends";
       if (daysEl) daysEl.innerText = zeroStr;
       if (hoursEl) hoursEl.innerText = zeroStr;
       if (minutesEl) minutesEl.innerText = zeroStr;
@@ -199,10 +224,6 @@ function initCountdownTimer() {
       if (vMinutesEl) vMinutesEl.innerText = zeroStr;
       if (vSecondsEl) vSecondsEl.innerText = zeroStr;
 
-      if (isProblemStatementsLocked) {
-        isProblemStatementsLocked = false;
-        updateProblemStatementsLockState();
-      }
       return;
     }
 
@@ -316,7 +337,7 @@ window.openProblemModal = function(psId) {
       <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
         <span class="ps-id-badge">${ps.id}</span>
         <span class="ps-round-pill ${ps.round === 'round-1' ? 'round-1-pill' : 'round-2-pill'}">
-          ${ps.round === 'round-1' ? 'Round 1 (2-Hour Sprint)' : 'Round 2 (Advanced 2-Hour Sprint)'}
+          ${ps.round === 'round-1' ? 'Round 1 (3-Hour Sprint)' : 'Round 2 (Advanced 3-Hour Sprint)'}
         </span>
       </div>
       <h2 class="modal-title">${ps.title}</h2>
@@ -338,7 +359,7 @@ window.openProblemModal = function(psId) {
       </div>
       <div class="spec-item">
         <span class="spec-key">Sprint Duration</span>
-        <span class="spec-val">2 Hours (Strict)</span>
+        <span class="spec-val">3 Hours (Strict)</span>
       </div>
     </div>
 
@@ -365,17 +386,11 @@ window.openProblemModal = function(psId) {
 
     <div class="modal-form-actions">
       <button class="nav-btn-secondary" onclick="closeAllModals()">Close</button>
-      <button class="btn-glow-primary" onclick="selectProblemForRegistration('${ps.id}')">Select this Problem</button>
     </div>
   `;
 
   modalOverlay.classList.add("active");
   document.body.style.overflow = "hidden";
-};
-
-window.selectProblemForRegistration = function(psId) {
-  closeAllModals();
-  openRegisterModal(psId);
 };
 
 // ==========================================
@@ -536,6 +551,10 @@ function initFormSubmissions() {
       const leadName = document.getElementById("regLeadName").value.trim();
       const leadRoll = document.getElementById("regLeadRoll").value.trim();
       const leadEmail = document.getElementById("regLeadEmail").value.trim();
+      const teamSize = document.getElementById("regTeamSize").value;
+      const leadPhone = document.getElementById("regLeadPhone").value.trim();
+      const member2Name = document.getElementById("regMember2Name").value.trim();
+      const member2Roll = document.getElementById("regMember2Roll").value.trim();
       const track = document.getElementById("regProblemTrack").value;
 
       if (!teamName || !leadName || !leadRoll || !leadEmail) {
@@ -545,9 +564,13 @@ function initFormSubmissions() {
 
       const payload = {
         teamName,
+        teamSize,
         leadName,
         leadRoll,
         leadEmail,
+        leadPhone,
+        member2Name,
+        member2Roll,
         track,
       };
 
@@ -578,7 +601,9 @@ function initFormSubmissions() {
     subForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const teamId = document.getElementById("subTeamId").value.trim();
+      const round = document.getElementById("subRoundSelect").value;
       const repoUrl = document.getElementById("subRepoUrl").value.trim();
+      const demoUrl = document.getElementById("subDemoUrl").value.trim();
       const notes = document.getElementById("subAgentNotes").value.trim();
 
       if (!teamId || !repoUrl) {
@@ -590,7 +615,7 @@ function initFormSubmissions() {
         const response = await fetch("/api/submit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ teamId, repoUrl, notes }),
+          body: JSON.stringify({ teamId, round, repoUrl, demoUrl, notes }),
         });
 
         const data = await response.json();

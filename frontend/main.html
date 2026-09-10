@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="inner.css" />
+    <title>Veda | AI Agent Challenge</title>
+    </head>
+    <body>
+    <main class="loader" aria-label="Loading Veda">
+        <div class="loader__topline">
+            <span class="loader__eyebrow">VEDA / AI AGENT CHALLENGE</span>
+            <!-- <span class="loader__version">VEDA 2K26</span> -->
+        </div>
+
+        <section class="loader__content">
+            <div class="loader__mark" aria-hidden="true">
+                <span class="loader__orbit loader__orbit--one"></span>
+                <span class="loader__orbit loader__orbit--two"></span>
+                <span class="loader__core">VEDA 2K26</span>
+            </div>
+            <p class="loader__status"><span></span> Initializing experience</p>
+            <h1>AI Agent<br><em>Challenge</em></h1>
+            <p class="loader__caption">Build intelligent ideas. Shape what comes next.</p>
+        </section>
+
+        <div class="loader__footer">
+            <div class="loader__progress" role="progressbar" aria-label="Loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <span></span>
+            </div>
+            <span class="loader__percent">00 / 100</span>
+        </div>
+    </main>
+    <script>
+    const progress = document.querySelector('.loader__progress');
+    const progressLabel = document.querySelector('.loader__percent');
+    const startedAt = Date.now();
+    const duration = 7000;
+
+    const updateProgress = () => {
+        const value = Math.min(100, Math.floor(((Date.now() - startedAt) / duration) * 100));
+        progress.setAttribute('aria-valuenow', value);
+        progressLabel.textContent = `${String(value).padStart(2, '0')} / 100`;
+        if (value < 100) requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    setTimeout(() => {
+        window.location.href = "./index.html";
+    }, duration);
+</script>
+    </body>
+</html>

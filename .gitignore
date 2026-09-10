@@ -15,6 +15,7 @@ htmlcov/
 .env
 .env.*
 !.env.example
+backend/veda.db
 
 # Editor and operating-system files
 .vscode/
