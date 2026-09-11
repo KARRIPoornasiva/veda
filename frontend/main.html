@@ -12,7 +12,7 @@
             <span class="loader__eyebrow">VEDA / AI AGENT CHALLENGE</span>
             <!-- <span class="loader__version">VEDA 2K26</span> -->
         </div>
-
+ 
         <section class="loader__content">
             <div class="loader__mark" aria-hidden="true">
                 <span class="loader__orbit loader__orbit--one"></span>
@@ -20,7 +20,7 @@
                 <span class="loader__core">VEDA 2K26</span>
             </div>
             <p class="loader__status"><span></span> Initializing experience</p>
-            <h1>AI Agent<br><em>Challenge</em></h1>
+            <h1> Welcome To <br> Day-2  Of AI Agent Challenge</em></h1>
             <p class="loader__caption">Build intelligent ideas. Shape what comes next.</p>
         </section>
 
@@ -35,15 +35,15 @@
     const progress = document.querySelector('.loader__progress');
     const progressLabel = document.querySelector('.loader__percent');
     const startedAt = Date.now();
-    const duration = 7000;
-
+    const duration = 15000;
+    
     const updateProgress = () => {
         const value = Math.min(100, Math.floor(((Date.now() - startedAt) / duration) * 100));
         progress.setAttribute('aria-valuenow', value);
         progressLabel.textContent = `${String(value).padStart(2, '0')} / 100`;
         if (value < 100) requestAnimationFrame(updateProgress);
     };
-
+    
     updateProgress();
     setTimeout(() => {
         window.location.href = "./index.html";

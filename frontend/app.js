@@ -45,7 +45,7 @@ function updateProblemStatementsLockState() {
     if (lockedVault) lockedVault.style.display = "block";
     if (unlockedContainer) unlockedContainer.style.display = "none";
     if (headerBadge) headerBadge.innerHTML = "🔒 Sealed Confidential";
-    if (headerSubtitle) headerSubtitle.innerText = "Official Problem Statements are encrypted and will be revealed simultaneously across all lab workstations at hackathon start time.";
+    if (headerSubtitle) headerSubtitle.innerText = "Official Problem Statements are encrypted and will be revealed simultaneously across all lab workstations.";
     if (regTrack) {
       regTrack.innerHTML = `
         <option value="GENERAL">General Autonomous AI Agent Track</option>
@@ -60,19 +60,14 @@ function updateProblemStatementsLockState() {
     if (lockedVault) lockedVault.style.display = "none";
     if (unlockedContainer) unlockedContainer.style.display = "block";
     if (headerBadge) headerBadge.innerHTML = "⚡ Unlocked & Live";
-    if (headerSubtitle) headerSubtitle.innerText = "Official Problem Statements are now live! Teams have 3 hours to build and demonstrate their working AI Agent.";
+    if (headerSubtitle) headerSubtitle.innerText = "Official Problem Statements are now live! Teams have 2 hours to build and demonstrate their working AI Agent.";
     if (regTrack) {
       regTrack.innerHTML = `
-        <option value="PS-01">PS-01: Healthcare Triaging Agent</option>
-        <option value="PS-02">PS-02: FinTech Fraud Forensics Agent</option>
-        <option value="PS-03">PS-03: Self-Reflective Code Auditor</option>
-        <option value="PS-04">PS-04: Campus Academic Navigator</option>
-        <option value="PS-05">PS-05: Fact-Checking Investigative Agent</option>
-        <option value="PS-06">PS-06: Self-Reflective Code Review Agent</option>
-        <option value="PS-07">PS-07: Campus Academic Navigator</option>
-        <option value="PS-08">PS-08: Investigative Fact-Checking Agent</option>
-        <option value="PS-09">PS-09: Security Incident Triage Agent</option>
-        <option value="PS-10">PS-10: Civic Operations Coordinator</option>
+        <option value="PS-01">PS-01: Student Grievance Management Agent</option>
+        <option value="PS-02">PS-02: Examination Management Agent</option>
+        <option value="PS-03">PS-03: Disaster Management Agent</option>
+        <option value="PS-04">PS-04: Public Education Management Agent</option>
+        <option value="PS-05">PS-05: Public Transport Management Agent</option>
       `;
     }
   }
@@ -179,10 +174,10 @@ function initCountdownTimer() {
   const testStart = Date.now() + 10 * 1000;
   const startDate = isTimerTestMode
     ? testStart
-    : new Date("September 11, 2026 10:00:00").getTime();
+    : new Date("September 12, 2026 10:00:00").getTime();
   const endDate = isTimerTestMode
     ? testStart + 2 * 60 * 1000
-    : new Date("September 11, 2026 13:00:00").getTime();
+    : new Date("September 12, 2026 13:00:00").getTime();
 
   const daysEl = document.getElementById("countdownDays");
   const hoursEl = document.getElementById("countdownHours");
@@ -320,7 +315,7 @@ function initProblemFilters() {
 // Global modal opener for Problem Blueprint
 window.openProblemModal = function(psId) {
   if (isProblemStatementsLocked) {
-    showToast("🔒 Access Denied: Problem statements are sealed until hackathon start time!", "warning");
+    showToast("🔒 Access Denied: Problem statements are sealed until they are unlocked.", "warning");
     return;
   }
 
@@ -337,7 +332,7 @@ window.openProblemModal = function(psId) {
       <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
         <span class="ps-id-badge">${ps.id}</span>
         <span class="ps-round-pill ${ps.round === 'round-1' ? 'round-1-pill' : 'round-2-pill'}">
-          ${ps.round === 'round-1' ? 'Round 1 (3-Hour Sprint)' : 'Round 2 (Advanced 3-Hour Sprint)'}
+          ${ps.round === 'round-1' ? 'Round 1 (2-Hour Sprint)' : 'Round 2 (Advanced 2-Hour Sprint)'}
         </span>
       </div>
       <h2 class="modal-title">${ps.title}</h2>
@@ -359,7 +354,7 @@ window.openProblemModal = function(psId) {
       </div>
       <div class="spec-item">
         <span class="spec-key">Sprint Duration</span>
-        <span class="spec-val">3 Hours (Strict)</span>
+        <span class="spec-val">2 Hours Sprint</span>
       </div>
     </div>
 
